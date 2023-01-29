@@ -14,7 +14,7 @@ import Mixer from '../components/Mixer';
 
 const walletProviders = initializeProviders([], {
 	network: 'testnet',
-	nodeServer: 'https://testnet-algorand.api.purestake.io/ps2',
+	nodeServer: 'https://testnet-api.algonode.cloud',
 	nodeToken: '',
 	nodePort: '',
 });
@@ -85,7 +85,9 @@ const Home = () => {
 										whileTap={{ cursor: 'grabbing' }}
 										className='text-white'
 									>
-										{!activeAccount?.address ? <Loader /> : <Mixer />}
+										<WalletProvider value={walletProviders}>
+											{!activeAccount?.address ? <Loader /> : <Mixer />}
+										</WalletProvider>
 									</motion.div>
 								</div>
 								<div className='blue_gradient' />
