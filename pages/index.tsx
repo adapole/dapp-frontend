@@ -1,86 +1,96 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from 'next/head';
+import Image from 'next/image';
+import Modal from '../components/Modal';
+import { useEffect } from 'react';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
+import {
+	useWallet,
+	reconnectProviders,
+	initializeProviders,
+	WalletProvider,
+} from '@txnlab/use-wallet';
+import Loader from '../components/Loader';
+import Mixer from '../components/Mixer';
 
-const Home: NextPage = () => {
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+const walletProviders = initializeProviders();
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+const Home = () => {
+	const x = useMotionValue(0);
+	const y = useMotionValue(0);
+	const rotateX = useTransform(y, [-100, 100], [30, -30]);
+	const rotateY = useTransform(x, [-100, 100], [-30, 30]);
+	// Reconnect the session when the user returns to the dApp
+	useEffect(() => {
+		reconnectProviders(walletProviders);
+	}, []);
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
+	const { activeAccount } = useWallet();
 
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and its API.
-            </p>
-          </a>
+	return (
+		<div>
+			{/*<div className='flex min-h-screen flex-col items-center justify-center py-2'>*/}
+			<Head>
+				<title>Coin Fog</title>
+				<link rel='icon' href='/favicon.ico' />
+			</Head>
+			<div className='flex justify-center min-h-screen sm:px-16 px-6 bg-site-black'>
+				<div className='flex justify-between items-center flex-col max-w-[1280px] w-full'>
+					<header className='flex flex-row justify-between items-center w-full sm:py-10 py-6'>
+						<Image
+							src='/vercel.svg'
+							alt='Vercel Logo'
+							width={72}
+							height={16}
+							className='object-contain'
+						/>
+						<WalletProvider value={walletProviders}>
+							<Modal />
+						</WalletProvider>
+					</header>
+					<div className='flex-1 flex justify-start items-center flex-col w-full mt-10'>
+						<h1 className='text-white font-poppins font-black text-5xl tracking-wide'>
+							CoinFog
+						</h1>
+						<p className='text-dim-white font-poppins font-medium mt-3 text-base'>
+							Privacy for tokens on Algorand
+						</p>
 
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
+						<motion.div
+							style={{ x, y, rotateX, rotateY, z: 100 }}
+							drag
+							dragElastic={0.16}
+							dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
+							whileTap={{ cursor: 'grabbing' }}
+							className='mt-10 w-full flex justify-center cursor-grab'
+						>
+							<div className='relative md:max-w-[700px] md:min-w-[500px] min-w-full max-w-full gradient-border p-[2px] rounded-3xl'>
+								<div className='pink_gradient' />
+								<div className='w-full min-h-[400px] bg-site-black backdrop-blur-[4px] rounded-3xl shadow-card flex p-10'>
+									<motion.div
+										style={{
+											x,
+											y,
+											rotateX,
+											rotateY,
 
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
+											z: 10000,
+										}}
+										drag
+										dragElastic={0.12}
+										whileTap={{ cursor: 'grabbing' }}
+										className='text-white'
+									>
+										{!activeAccount?.address ? <Loader /> : <Mixer />}
+									</motion.div>
+								</div>
+								<div className='blue_gradient' />
+							</div>
+						</motion.div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center gap-2"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-        </a>
-      </footer>
-    </div>
-  )
-}
-
-export default Home
+export default Home;
