@@ -12,7 +12,12 @@ import {
 import Loader from '../components/Loader';
 import Mixer from '../components/Mixer';
 
-const walletProviders = initializeProviders();
+const walletProviders = initializeProviders([], {
+	network: 'testnet',
+	nodeServer: 'https://testnet-algorand.api.purestake.io/ps2',
+	nodeToken: '',
+	nodePort: '',
+});
 
 const Home = () => {
 	const x = useMotionValue(0);

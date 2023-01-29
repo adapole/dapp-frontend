@@ -7,11 +7,13 @@ import {
 } from '@txnlab/use-wallet';
 import algosdk from 'algosdk';
 
-const algodClient = new algosdk.Algodv2(
-	DEFAULT_NODE_TOKEN,
-	DEFAULT_NODE_BASEURL,
-	DEFAULT_NODE_PORT
-);
+const baseServer = 'https://testnet-algorand.api.purestake.io/ps2';
+const port = '';
+const token = {
+	'X-API-Key': process.env.NEXT_PUBLIC_PURESTAKE ?? '',
+};
+
+const algodClient = new algosdk.Algodv2(token, baseServer, port);
 
 export default function Transact() {
 	const { activeAddress, signTransactions, sendTransactions, activeAccount } =
