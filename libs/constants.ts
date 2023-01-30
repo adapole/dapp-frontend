@@ -1,2 +1,2 @@
-export const app_id = 156345278;
+export const app_id = 156510968;
 export const RelayContract = `gqRsc2lng6NhcmeRxAgAAAAACVGjvqFsxB8IMSAyAxIxATIADhAxEIEGEjEZgQASEBAxGC0XEhBDo3NpZ8RAj6T0xdb5negwR6d9sEbC4Y0l2x5/owj8DaG/TxwwKaOJnRhmXvb0YXrsO5d1i76V3iR5KeZokCiDNvxqiq6KC6ZzaWdrZXnEIGMlOiEyYGNTlHBpBM8N/U/9KRwWic156r7JhKgxT2rU`;
