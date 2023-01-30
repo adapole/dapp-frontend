@@ -1,13 +1,13 @@
 import Image from 'next/image';
 const Loader = () => {
 	return (
-		<div className='flex justify-center items-center flex-col w-full min-h-full'>
+		<div className='flex justify-center items-center flex-col gap-2 w-full min-h-full'>
 			<Image
-				src='/vercel.svg'
+				src='/coinfog.jpg'
 				alt='Logo'
-				width={56}
-				height={56}
-				className='w-56 h-56 object-contain'
+				width={1000}
+				height={100}
+				className='w-full min-h-full object-contain rounded-3xl'
 			/>
 			<p className='font-poppins font-normal text-dim-white text-lg text-center mt-10'>
 				Connect your wallet

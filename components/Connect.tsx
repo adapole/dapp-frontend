@@ -18,10 +18,10 @@ export default function Connect(props: { setShowModal: any }) {
 						<></>
 					) : (
 						<div
-							onClick={
-								provider.connect
-								//setShowModal(false);
-							}
+							onClick={() => {
+								provider.connect();
+								setShowModal(false);
+							}}
 							className={activeLink}
 						>
 							<Image

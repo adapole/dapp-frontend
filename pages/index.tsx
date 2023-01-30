@@ -42,11 +42,11 @@ const Home = () => {
 				<div className='flex justify-between items-center flex-col max-w-[1280px] w-full'>
 					<header className='flex flex-row justify-between items-center w-full sm:py-10 py-6'>
 						<Image
-							src='/vercel.svg'
-							alt='Vercel Logo'
+							src='/coinfog_logo.jpg'
+							alt='CoinFog Logo'
 							width={72}
 							height={16}
-							className='object-contain'
+							className='rounded-full opacity-40 object-contain'
 						/>
 						<WalletProvider value={walletProviders}>
 							<Modal />

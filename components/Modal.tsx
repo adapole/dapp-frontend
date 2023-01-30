@@ -1,15 +1,19 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useWallet } from '@txnlab/use-wallet';
 import Connect from './Connect';
 import ToolTip from './ToolTip';
 import { RxCopy } from 'react-icons/rx';
+import { useOnClickOutside } from '../libs/helpers';
 
 export default function Modal() {
 	const [showModal, setShowModal] = useState(false);
 	const [isCopied, setIsCopied] = useState(false);
 	const { providers, activeAccount } = useWallet();
+
+	const ref = useRef<HTMLDivElement>(null);
+	useOnClickOutside(ref, () => setShowModal(false));
 	return (
 		<>
 			{activeAccount?.address ? (
@@ -86,7 +90,10 @@ export default function Modal() {
 					<div className='justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-site-dim2'>
 						<div className='relative w-auto my-6 mx-auto max-w-3xl'>
 							{/*content*/}
-							<div className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-site-black outline-none focus:outline-none'>
+							<div
+								ref={ref}
+								className='border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-site-black outline-none focus:outline-none'
+							>
 								{/*header*/}
 								<div className='flex  justify-between p-5 border-b border-solid border-slate-200 rounded-t items-center'>
 									<h3 className='text-3xl font-semibold text-dim-white'>
