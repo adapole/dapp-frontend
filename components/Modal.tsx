@@ -4,9 +4,11 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { useWallet } from '@txnlab/use-wallet';
 import Connect from './Connect';
 import ToolTip from './ToolTip';
+import { RxCopy } from 'react-icons/rx';
 
 export default function Modal() {
 	const [showModal, setShowModal] = useState(false);
+	const [isCopied, setIsCopied] = useState(false);
 	const { providers, activeAccount } = useWallet();
 	return (
 		<>
@@ -45,6 +47,22 @@ export default function Modal() {
 													</option>
 												))}
 											</select>
+											<ToolTip
+												tooltip={isCopied ? 'Copied' : 'Copy To Clipboard'}
+											>
+												<button
+													type='button'
+													onClick={() => {
+														navigator.clipboard.writeText(
+															activeAccount.address
+														);
+														setIsCopied(true);
+													}}
+													className='text-white'
+												>
+													<RxCopy />
+												</button>
+											</ToolTip>
 										</div>
 									)}
 								</div>
