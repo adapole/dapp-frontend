@@ -41,12 +41,10 @@ const Home = () => {
 			<div className='flex justify-center min-h-screen sm:px-16 px-6 bg-site-black'>
 				<div className='flex justify-between items-center flex-col max-w-[1280px] w-full'>
 					<header className='flex flex-row justify-between items-center w-full sm:py-10 py-6'>
-						<Image
+						<img
 							src='/coinfog_logo.jpg'
 							alt='CoinFog Logo'
-							width={72}
-							height={16}
-							className='rounded-full opacity-40 object-contain'
+							className='w-16 h-16 rounded-full opacity-40 object-contain'
 						/>
 						<WalletProvider value={walletProviders}>
 							<Modal />

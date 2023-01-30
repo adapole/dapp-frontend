@@ -25,7 +25,7 @@ export default function Modal() {
 									{provider.isActive && provider.accounts.length && (
 										<div className='flex justify-center items-center mr-4'>
 											<ToolTip tooltip='Click to Disconnect'>
-												<Image
+												<img
 													onClick={provider.disconnect}
 													src={provider.metadata.icon}
 													alt='Disconnect'

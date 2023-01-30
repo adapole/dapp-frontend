@@ -2,12 +2,10 @@ import Image from 'next/image';
 const Loader = () => {
 	return (
 		<div className='flex justify-center items-center flex-col gap-2 w-full min-h-full'>
-			<Image
+			<img
 				src='/coinfog.jpg'
 				alt='Logo'
-				width={1000}
-				height={100}
-				className='w-full min-h-full object-contain rounded-3xl'
+				className='w-[1000] min-h-full object-contain rounded-3xl'
 			/>
 			<p className='font-poppins font-normal text-dim-white text-lg text-center mt-10'>
 				Connect your wallet
@@ -17,7 +15,13 @@ const Loader = () => {
 };
 
 export default Loader;
-/* Welcome to CoinFog, Algorand's first mixing application that
+/*
+width={72}
+							height={16}
+							width={1000}
+				height={100}
+
+Welcome to CoinFog, Algorand's first mixing application that
 			<br />
 			helps you keep your cryptocurrency private and secure!
 			<br /> Our algorithm ensures your digital funds remain anonymous and

@@ -24,7 +24,7 @@ export default function Connect(props: { setShowModal: any }) {
 							}}
 							className={activeLink}
 						>
-							<Image
+							<img
 								width={30}
 								height={30}
 								alt=''
