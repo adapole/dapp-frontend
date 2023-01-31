@@ -14,6 +14,8 @@ import createTransactionToSign, {
 	TransactionToSignType,
 } from '../libs/helpers';
 import Withdraw from './Withdraw';
+import { useShowModal } from '../contexts/ContextProvider';
+import ToolTip from './ToolTip';
 
 const Mixer = () => {
 	const [openTab, setOpenTab] = useState(1);
@@ -21,6 +23,7 @@ const Mixer = () => {
 	const [nullifier, setNullifier] = useState('');
 	const { activeAddress, signTransactions, sendTransactions, activeAccount } =
 		useWallet();
+	const { handleToggle } = useShowModal();
 
 	const sendTransaction = async (
 		from?: string,
@@ -97,7 +100,7 @@ const Mixer = () => {
 		console.log(getRndInteger(11, 100000));
 		hash(note).then((hex) => console.log(hex));
 	};
-	const appCall = async (from: string, note?: string, nullifier?: string) => {
+	const appCall = async (from: string, note: string, nullifier?: string) => {
 		if (!from || !note || !nullifier) {
 			throw new Error('Missing transaction params.');
 		}
@@ -201,13 +204,13 @@ const Mixer = () => {
 				className='flex mb-0 list-none flex-wrap pb-4 flex-row'
 				role='tablist'
 			>
-				<li className='-mb-px mr-2 last:mr-0 flex-auto text-center'>
+				<li className=' -mb-px mr-2 last:mr-0 flex-auto text-center '>
 					<a
 						className={
-							'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
+							' text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
 							(openTab === 1
-								? 'text-white bg-site-pink'
-								: 'text-dim-white bg-site-black')
+								? 'text-white bg-[#19a0c9]'
+								: 'text-dim-white bg-site-black gradient-border')
 						}
 						onClick={(e) => {
 							e.preventDefault();
@@ -225,8 +228,8 @@ const Mixer = () => {
 						className={
 							'text-xs font-bold uppercase px-5 py-3 shadow-lg rounded block leading-normal ' +
 							(openTab === 2
-								? 'text-white bg-site-pink'
-								: 'text-dim-white bg-site-black')
+								? 'text-white bg-[#19a0c9]'
+								: 'text-dim-white bg-site-black gradient-border')
 						}
 						onClick={(e) => {
 							e.preventDefault();
@@ -252,19 +255,35 @@ const Mixer = () => {
 									<SliderDot />
 									<Balance nullifier={nullifier} />
 								</div>
+
 								<button
 									onClick={async () => {
-										if (activeAddress)
+										if (activeAddress) {
+											console.log('Active-Address');
 											await appCall(
 												activeAddress,
 												noteValue,
 												getRndInteger(11, 100000).toString()
 											);
+										} else {
+											handleToggle(true);
+										}
 										//sendTransaction(activeAddress, activeAddress, 1000, noteValue);
 									}}
-									className={`bg-site-pink border-none outline-none px-6 py-2 font-poppins font-bold text-lg rounded-2xl leading-[24px] transition-all min-h-[56px]`}
+									className={`bg-[#19a0c9] border-none outline-none px-6 py-2 rounded-2xl leading-[24px] transition-all min-h-[56px]`}
 								>
-									Deposit
+									<ToolTip
+										tooltip={
+											!activeAccount?.address
+												? 'Connect to make deposit'
+												: undefined
+										}
+									>
+										<p className='font-poppins font-bold text-lg'>
+											<span className='block md:hidden'>Connect</span>
+											<span className='hidden md:block'>Deposit</span>
+										</p>
+									</ToolTip>
 								</button>
 
 								{/* <button

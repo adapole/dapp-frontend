@@ -6,14 +6,16 @@ import Connect from './Connect';
 import ToolTip from './ToolTip';
 import { RxCopy } from 'react-icons/rx';
 import { useOnClickOutside } from '../libs/helpers';
+import { useShowModal } from '../contexts/ContextProvider';
 
 export default function Modal() {
-	const [showModal, setShowModal] = useState(false);
+	const { showModal, handleToggle } = useShowModal();
+	//const [showModal, setShowModal] = useState(false);
 	const [isCopied, setIsCopied] = useState(false);
 	const { providers, activeAccount } = useWallet();
 
 	const ref = useRef<HTMLDivElement>(null);
-	useOnClickOutside(ref, () => setShowModal(false));
+	useOnClickOutside(ref, () => handleToggle(false));
 	return (
 		<>
 			{activeAccount?.address ? (
@@ -80,7 +82,7 @@ export default function Modal() {
 				<button
 					className='bg-site-pink border-none outline-none px-6 py-2 font-poppins font-bold text-lg text-white rounded-xl leading-[24px] hover:bg-pink-600 transition-all'
 					type='button'
-					onClick={() => setShowModal(true)}
+					onClick={() => handleToggle(true)}
 				>
 					Connect wallet
 				</button>
@@ -101,7 +103,7 @@ export default function Modal() {
 									</h3>
 									<button
 										className='p-1 ml-auto bg-transparent border-0 float-right text-3xl leading-none font-semibold outline-none focus:outline-none'
-										onClick={() => setShowModal(false)}
+										onClick={() => handleToggle(false)}
 									>
 										<span className='bg-transparent text-white opacity-50 rounded-full h-6 w-6 text-2xl block outline-none focus:outline-none hover:text-white hover:bg-site-dim2 hover:opacity-80 hover:animate-[spin_2s_ease-in-out]'>
 											<AiOutlineClose />
@@ -109,7 +111,7 @@ export default function Modal() {
 									</button>
 								</div>
 								{/*body*/}
-								<Connect setShowModal={setShowModal} />
+								<Connect />
 								{/*footer
 								<div className='flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b'>
 									<button

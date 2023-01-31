@@ -37,7 +37,13 @@ const Balance = (props: { nullifier: string }) => {
 	}, []);
 */
 	if (!activeAddress) {
-		return <p>Connect an account first.</p>;
+		return (
+			<div className='w-full text-left mt-2 ml-2'>
+				<div className='font-poppins font-normal text-dim-white'>
+					<p className='text-white'>Connect an account first.</p>
+				</div>
+			</div>
+		);
 	}
 	return (
 		<div className='w-full text-left mt-2 ml-2'>

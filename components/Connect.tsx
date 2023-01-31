@@ -1,8 +1,10 @@
 import { useWallet } from '@txnlab/use-wallet';
 import Image from 'next/image';
+import { useShowModal } from '../contexts/ContextProvider';
 
-export default function Connect(props: { setShowModal: any }) {
-	const { setShowModal } = props;
+export default function Connect() {
+	//const { setShowModal } = props;
+	const { handleToggle } = useShowModal();
 	const { providers, activeAccount } = useWallet();
 
 	const activeLink =
@@ -20,7 +22,7 @@ export default function Connect(props: { setShowModal: any }) {
 						<div
 							onClick={() => {
 								provider.connect();
-								setShowModal(false);
+								handleToggle(false);
 							}}
 							className={activeLink}
 						>

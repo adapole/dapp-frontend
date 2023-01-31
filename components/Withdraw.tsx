@@ -187,7 +187,7 @@ const Withdraw = () => {
 					const a = await tealProgramRelay(app_id);
 					await appCall(a, newAddress, withdrawSecret, withdrawNullifier);
 				}}
-				className={`bg-site-pink border-none outline-none px-6 py-2 font-poppins font-bold text-lg rounded-2xl leading-[24px] transition-all min-h-[56px]`}
+				className={`bg-[#19a0c9] border-none outline-none px-6 py-2 font-poppins font-bold text-lg rounded-2xl leading-[24px] transition-all min-h-[56px]`}
 			>
 				Withdraw
 			</button>
