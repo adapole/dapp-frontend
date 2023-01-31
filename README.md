@@ -1,27 +1,37 @@
-# Next.js + Tailwind CSS Example
+# CoinFog
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This demo shows how to use `CoinFog` mixer with a frontend dapp. You can use your own relay for withdrawing from the mixer contract. For your relay add a `.env` file to the project and store the memonic of the relay address you prefer. The relay address should have an account balance greater than zero, since it needs to pay for transaction fees when calling the smart contract.
+
+```bash
+NEXT_PUBLIC_TESTACCOUNT_MENMONIC='YOUR-MEMONIC-HERE'
+```
 
 ## Deploy your own
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+Deploy the demo locally or preview live [CoinFog on Vercel](https://coinfog.vercel.app/) or [CoinFog on IPFS](https://coinfog.on.fleek.co/)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+## How to run locally
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+Execute `dev` with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to run the demo on local server:
 
 ```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
+git clone https://github.com/adapole/dapp-frontend.git
+
+cd dapp-frontend
 ```
 
 ```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+npm install
+
+npm run dev
 ```
 
 ```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
+pnpm install
+
+pnpm dev
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## Built with
+
+Next.js + Tailwind CSS + Typescript
