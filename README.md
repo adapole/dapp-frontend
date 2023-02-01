@@ -8,7 +8,7 @@ NEXT_PUBLIC_TESTACCOUNT_MENMONIC='YOUR-MEMONIC-HERE'
 
 ## Deploy your own
 
-Deploy the demo locally or preview live [CoinFog on Vercel](https://coinfog.vercel.app/) or [CoinFog on IPFS](https://coinfog.on.fleek.co/)
+Deploy the demo locally or preview live [CoinFog on Vercel](https://coinfog.vercel.app/) or [CoinFog on IPFS](https://coinfog.on.fleek.co/).
 
 ## How to run locally
 
